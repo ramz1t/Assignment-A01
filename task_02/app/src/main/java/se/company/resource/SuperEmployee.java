@@ -20,7 +20,7 @@ public class SuperEmployee extends Employee {
     public SuperEmployee(String name, String work, int salary) {
         super(name, work, salary);
         this.powers = new ArrayList<>();
-        this.prefix = "Sup(" + id + "): ";
+        this.prefix = "Sup(" + id + "):";
     }
 
     /**

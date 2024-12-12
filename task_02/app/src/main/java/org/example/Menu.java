@@ -57,8 +57,7 @@ public class Menu {
     public void run() {
         printMenu();
         while (true) {
-            System.out.print("Enter your choice: ");
-            String choice = scanner.nextLine();
+            String choice = prompt("Enter your choice: ");
 
             if (choice.equals("Q") || choice.equals("q")) {
                 System.exit(0);

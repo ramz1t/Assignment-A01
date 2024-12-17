@@ -23,8 +23,8 @@ public class Menu {
      * @param action The Runnable to execute when this option is selected
      */
     public void addOption(String key, String description, Runnable action) {
-        descriptions.put(key, description);
-        actions.put(key, action);
+        descriptions.put(key.toLowerCase(), description);
+        actions.put(key.toLowerCase(), action);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Menu {
         System.out.println("----------------");
         descriptions.forEach((key, value) -> System.out.println("| " + key + ") " + value));
         System.out.println("| m) Print menu");
-        System.out.println("| qQ) Quit");
+        System.out.println("| q) Quit");
         System.out.println("----------------");
     }
 
@@ -57,9 +57,9 @@ public class Menu {
     public void run() {
         printMenu();
         while (true) {
-            String choice = prompt("Enter your choice: ");
+            String choice = prompt("Enter your choice: ").toLowerCase();
 
-            if (choice.equals("Q") || choice.equals("q")) {
+            if (choice.equals("q")) {
                 System.exit(0);
             } else if (choice.equals("m")) {
                 printMenu();

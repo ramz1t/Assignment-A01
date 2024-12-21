@@ -11,32 +11,32 @@ public class Menu {
         String choice;
         printMenu();
         do {
-            choice = getChoice();
-            switch (choice) {
-                case "1":
-                    Avatar.print();
-                    break;
-                case "2":
-                    Today.print();
-                    break;
-                case "3A":
-                    RockPaperScissors gameRPC = new RockPaperScissors();
-                    gameRPC.play();
-                    break;
-                case "3B":
-                    Dice die = new Dice(6);
-                    DiceGame21 game21 = new DiceGame21(die);
-                    game21.play();
-                case "m":
-                    printMenu();
-                    break;
-                case "Q":
-                case "q":
-                    break;
-                default:
-                    System.err.println("Bad menu choice, use 'm' to get the menu.");
-            }
-        } while (!(choice.equals("q") || choice.equals("Q")));
+            choice = getChoice().toLowerCase();
+            handleMenuChoice(choice);
+        } while (!choice.equals("q"));
+    }
+
+    private void handleMenuChoice(String choice) {
+        switch (choice) {
+            case "1" -> Avatar.print();
+            case "2" -> Today.print(); 
+            case "3a" -> playRockPaperScissors();
+            case "3b" -> playDiceGame();
+            case "m" -> printMenu();
+            case "q" -> {}
+            default -> System.err.println("Bad menu choice, use 'm' to get the menu.");
+        }
+    }
+
+    private void playRockPaperScissors() {
+        RockPaperScissors gameRPC = new RockPaperScissors();
+        gameRPC.play();
+    }
+
+    private void playDiceGame() {
+        Dice die = new Dice(6);
+        DiceGame21 game21 = new DiceGame21(die);
+        game21.play();
     }
 
     private String getChoice() {

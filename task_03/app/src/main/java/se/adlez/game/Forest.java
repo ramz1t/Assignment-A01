@@ -200,7 +200,7 @@ public class Forest implements Serializable {
      * @return true if the position is valid, false otherwise
      */
     public boolean isValidPosition(Position position) {
-        return position.getX() >= 1 && position.getX() < WIDTH && position.getY() >= 1 && position.getY() < HEIGHT;
+        return position.getX() >= 1 && position.getX() <= WIDTH && position.getY() >= 1 && position.getY() <= HEIGHT;
     }
 
     /**

@@ -32,11 +32,11 @@ public class Menu {
      * plus the standard menu and quit commands.
      */
     public void printMenu() {
-        System.out.println("----------------");
-        descriptions.forEach((key, value) -> System.out.println("| " + key + ") " + value));
-        System.out.println("| m) Print menu");
-        System.out.println("| q) Quit");
-        System.out.println("----------------");
+        println("----------------");
+        descriptions.forEach((key, value) -> println("| " + key + ") " + value));
+        println("| m) Print menu");
+        println("| q) Quit");
+        println("----------------");
     }
 
     /**
@@ -45,9 +45,25 @@ public class Menu {
      * @return The user's input as a String
      */
     public String prompt(String message) {
-        System.out.print(message);
+        print(message);
         return scanner.nextLine();
     }
+
+    /**
+     * Prints a message to the console without a line break.
+     * @param message The message to print
+     */
+    public void print(String message) {
+        System.out.print(message);
+    }
+
+    /**
+     * Prints a message to the console followed by a line break.
+     * @param message The message to print
+     */
+    public void println(String message) {
+        System.out.println(message);
+    }   
 
     /**
      * Starts the menu system, displaying options and handling user input.
@@ -66,7 +82,7 @@ public class Menu {
             } else if (actions.containsKey(choice)) {
                 actions.get(choice).run();
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                println("Invalid choice. Please try again.");
             }
         }
     }

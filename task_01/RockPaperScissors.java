@@ -2,9 +2,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class RockPaperScissors extends Game {
-    String[] commands = {"r", "p", "s"};
-    Random random = new Random();
-    String playerMove, botMove;
+    private String[] commands = {"r", "p", "s"};
+    private Random random = new Random();
+    private String playerMove, botMove;
 
     public void play() {
         System.out.println("Welcome to a game of rock ✊, scissor ✂, paper ✋!");

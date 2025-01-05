@@ -53,20 +53,25 @@ public class App {
      */
     private static void createNewTeam() {
         team = new Team();
-        System.out.println(team.toString());
+        menu.println(team.toString());
     }
 
     /**
      * Prompts user for employee details and adds a new normal employee to the team.
      */
     private static void addNormalEmployee() {
-        System.out.println("# Create new NormalEmployee");
+        menu.println("# Create new NormalEmployee");
         String name = menu.prompt(" Enter name: ");
         String work = menu.prompt(" Enter work: ");
-        int salary = Integer.parseInt(menu.prompt(" Enter salary: "));
+        int salary = 0;
+        try {
+            salary = Integer.parseInt(menu.prompt(" Enter salary: "));
+        } catch (NumberFormatException e) {
+            menu.println("Invalid salary input. Setting salary to 0.");
+        }
         NormalEmployee emp = new NormalEmployee(name, work, salary);
         team.add(emp);
-        System.out.println(team.toString());
+        menu.println(team.toString());
     }
 
     /**
@@ -79,26 +84,26 @@ public class App {
         team.add(john);
         team.add(jane);
         team.add(littleJr);
-        System.out.println(team.toString());
+        menu.println(team.toString());
     }
 
     /**
      * Prints out the work being done by all team members.
      */
     private static void printWork() {
-        System.out.println(team.work());
+        menu.println(team.work());
     }
 
     /**
      * Prompts user for employee details and adds a new super employee to the team.
      */
     private static void addSuperEmployee() {
-        System.out.println("# Create new SuperEmployee");
+        menu.println("# Create new SuperEmployee");
         String name = menu.prompt(" Enter name: ");
         String work = menu.prompt(" Enter work: ");
-        SuperEmployee emp = new SuperEmployee(name, work, 0);
+        SuperEmployee emp = new SuperEmployee(name, work);
         team.add(emp);
-        System.out.println(team.toString());
+        menu.println(team.toString());
     }
 
     /**
@@ -110,27 +115,27 @@ public class App {
         SuperPower invisibility = new SuperPower("Invisibility", "Become invisible to the naked eye");
         SuperPower speed = new SuperPower("Speed", "Run with speed of sound");
 
-        SuperEmployee superman = new SuperEmployee("Superman", "Security", 0);
+        SuperEmployee superman = new SuperEmployee("Superman", "Security");
         superman.addPower(flight);
         superman.addPower(speed);
 
-        SuperEmployee hulk = new SuperEmployee("Hulk", "Avengers", 0);
+        SuperEmployee hulk = new SuperEmployee("Hulk", "Avengers");
         hulk.addPower(speed);
 
-        SuperEmployee doctorStrange = new SuperEmployee("Doctor Strange", "Magic", 0);
+        SuperEmployee doctorStrange = new SuperEmployee("Doctor Strange", "Magic");
         doctorStrange.addPower(flight);
         doctorStrange.addPower(invisibility);
 
         team.add(superman);
         team.add(hulk);
         team.add(doctorStrange);
-        System.out.println(team.toString());
+        menu.println(team.toString());
     }
 
     /**
      * Prints a salary report for all team members.
      */
     private static void printSalaryReport() {
-        System.out.println(team.salaryReport());
+        menu.println(team.salaryReport());
     }
 }

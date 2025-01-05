@@ -15,7 +15,7 @@ public abstract class Employee {
     /** Work role/department of the employee */
     protected String work;
     /** Salary of the employee */
-    protected int salary;
+    private int salary;
     /** Unique identifier for the employee */
     public int id;
 
@@ -29,7 +29,7 @@ public abstract class Employee {
         this.name = name;
         this.work = work;
         this.salary = salary;
-        this.id = getNewEmployeeId();
+        this.id = Employee.getNewId();
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class Employee {
      * Generates and returns a new unique employee ID.
      * @return New unique employee ID
      */
-    public static int getNewEmployeeId() {
+    public static int getNewId() {
         GLOBAL_ID++;
         return GLOBAL_ID;
     }

@@ -15,10 +15,9 @@ public class SuperEmployee extends Employee {
      * Creates a new super employee with the specified details.
      * @param name The name of the employee
      * @param work The work role/department of the employee
-     * @param salary The salary of the employee
      */
-    public SuperEmployee(String name, String work, int salary) {
-        super(name, work, salary);
+    public SuperEmployee(String name, String work) {
+        super(name, work, 0);
         this.powers = new ArrayList<>();
         this.prefix = "Sup(" + id + "):";
     }

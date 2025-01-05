@@ -52,7 +52,7 @@ public class Menu {
                 | 3A) Rock paper scissors
                 | 3B) Dice Game 21
                 | m) Print menu
-                | qQ) Quit
+                | q) Quit
                  -----------------""");
     }
 }

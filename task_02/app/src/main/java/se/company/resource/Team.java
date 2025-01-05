@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Team {
     /** List of employees that are members of this team */
-    ArrayList<Employee> members;
+    private ArrayList<Employee> members;
 
     /**
      * Creates a new empty team.

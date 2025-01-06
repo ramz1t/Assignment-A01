@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 /**
  * Utility class for saving and loading Forest objects to/from files.
- * Supports both Java serialization and JSON formats.
+ * Supports both Java serialization format.
  */
 public class ForestToFile {
     /**
@@ -47,33 +47,6 @@ public class ForestToFile {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading serialized forest from file '" + filename + "'");
             return null;
-        }
-    }
-
-    /**
-     * Converts a Forest object to a JSON string.
-     *
-     * @param forest The Forest object to convert
-     * @return A pretty-printed JSON string representation of the Forest
-     */
-    public static String toJson(Forest forest) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String prettyJson = gson.toJson(forest);
-        return prettyJson;
-    }
-
-    /**
-     * Saves a Forest object to a file in JSON format.
-     *
-     * @param forest The Forest object to save
-     * @param filename The name of the file to save to
-     */
-    public static void saveAsJson(Forest forest, String filename) {
-        String json = toJson(forest);
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(json);
-        } catch (IOException e) {
-            System.out.println("Error saving serialized forest to file '" + filename + "'");
         }
     }
 }

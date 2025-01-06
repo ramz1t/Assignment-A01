@@ -11,5 +11,5 @@ public interface Hunting {
      * @param pray The movable item that is being hunted
      * @param forest The forest environment where the hunting takes place
      */
-    void hunt(AbstractMovableItem pray, Forest forest);
+    void hunt(AbstractMoveableItem pray, Forest forest);
 }

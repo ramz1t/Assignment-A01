@@ -1,5 +1,5 @@
 package se.adlez.game;
 
-public interface Movable {
+public interface Moveable {
     Position getPosition();
 }

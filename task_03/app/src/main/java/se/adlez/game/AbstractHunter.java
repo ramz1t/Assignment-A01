@@ -4,7 +4,7 @@ package se.adlez.game;
  * Abstract base class for hunter entities in the game.
  * Extends AbstractMovableItem and implements the Hunting interface to provide hunting behavior.
  */
-public class AbstractHunter extends AbstractMovableItem implements Hunting {
+public class AbstractHunter extends AbstractMoveableItem implements Hunting {
     
     /**
      * Constructs a new AbstractHunter with the specified description, graphic and position.
@@ -29,7 +29,7 @@ public class AbstractHunter extends AbstractMovableItem implements Hunting {
      * @param forest The Forest instance containing the game state
      */
     @Override
-    public void hunt(AbstractMovableItem prey, Forest forest) {
+    public void hunt(AbstractMoveableItem prey, Forest forest) {
         Position preyPos = prey.getPosition();
         Position hunterPos = this.getPosition();
         

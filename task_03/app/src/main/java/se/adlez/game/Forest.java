@@ -13,9 +13,9 @@ public class Forest implements Serializable {
     final public static int HEIGHT = 10;
     final private String EMPTY_CELL = "🟩";
     private Map<Position, Item> items;
-    private AbstractMovableItem player;
+    private AbstractMoveableItem player;
     private AbstractHunter hunter;
-    private AbstractMovableItem home;
+    private AbstractMoveableItem home;
     private boolean gameOver = false;
     final private StringBuilder status = new StringBuilder();
 
@@ -85,7 +85,7 @@ public class Forest implements Serializable {
      * Adds a player to the forest and stores it as the current player.
      * @param player The player item to add
      */
-    public void addPlayerItem(AbstractMovableItem player) {
+    public void addPlayerItem(AbstractMoveableItem player) {
         items.put(player.getPosition(), player);
         this.player = player;
     }
@@ -103,7 +103,7 @@ public class Forest implements Serializable {
      * Adds a home to the forest and stores it as the current home.
      * @param home The home item to add
      */
-    public void addHomeItem(AbstractMovableItem home) {
+    public void addHomeItem(AbstractMoveableItem home) {
         items.put(home.getPosition(), home);
         this.home = home;
     }

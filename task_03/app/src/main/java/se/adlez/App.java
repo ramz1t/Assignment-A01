@@ -2,18 +2,7 @@ package se.adlez;
 import java.io.IOException;
 import java.util.Random;
 
-import se.adlez.game.AbstractHunter;
-import se.adlez.game.AbstractItem;
-import se.adlez.game.AbstractMovableItem;
-import se.adlez.game.Castle;
-import se.adlez.game.FirTree;
-import se.adlez.game.Forest;
-import se.adlez.game.ForestToFile;
-import se.adlez.game.Item;
-import se.adlez.game.Position;
-import se.adlez.game.Robot;
-import se.adlez.game.Rock;
-import se.adlez.game.Wolf;
+import se.adlez.game.*;
 
 /**
  * Main application class that manages the forest game.
@@ -155,9 +144,9 @@ public class App {
                                  random.nextInt(Forest.HEIGHT-1) + 1);
         } while (!forest.isEmptyPosition(homePos));
 
-        AbstractMovableItem player = new Robot(playerPos);
+        AbstractMoveableItem player = new Robot(playerPos);
         AbstractHunter hunter = new Wolf(hunterPos); 
-        AbstractMovableItem home = new Castle(homePos);
+        AbstractMoveableItem home = new Castle(homePos);
 
         forest.addPlayerItem(player);
         forest.addHunterItem(hunter);
@@ -225,7 +214,7 @@ public class App {
      * Prints the current forest state as JSON to the console.
      */
     public static void printAsJson() {
-        System.out.println(ForestToFile.toJson(forest));
+        System.out.println(ForestToJson.toJson(forest));
     }
 
     /**
@@ -234,6 +223,6 @@ public class App {
      */
     public static void saveAsJson() {
         String filename = menu.prompt("Enter filename to save to: ");
-        ForestToFile.saveAsJson(forest, filename);
+        ForestToJson.saveAsJson(forest, filename);
     }
 }

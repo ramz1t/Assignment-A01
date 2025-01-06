@@ -2,20 +2,20 @@ package se.adlez.game;
 
 /**
  * Abstract base class for game items that can move around the game world.
- * Extends AbstractItem and implements the Movable interface to provide position tracking.
+ * Extends AbstractItem and implements the Moveable interface to provide position tracking.
  */
-public class AbstractMovableItem extends AbstractItem implements Movable {
+public class AbstractMoveableItem extends AbstractItem implements Moveable {
     /** The current position of this item in the game world */
     final protected Position position;
 
     /**
-     * Constructs a new AbstractMovableItem with the specified description, graphic and position.
+     * Constructs a new AbstractMoveableItem with the specified description, graphic and position.
      *
      * @param description The text description of the item
      * @param graphic The visual representation of the item
      * @param position The initial position of the item in the game world
      */
-    public AbstractMovableItem(String description, String graphic, Position position) {
+    public AbstractMoveableItem(String description, String graphic, Position position) {
         super(description, graphic);
         this.position = position;
     }

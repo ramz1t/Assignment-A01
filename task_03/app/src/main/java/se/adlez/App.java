@@ -77,23 +77,34 @@ public class App {
      * Prompts user for item type and coordinates.
      */
     public static void addItems() {
-        String input = menu.prompt("Add FirTree 🌲 (1) or Rock 🪨  (2): Enter your choice: ");
-        
+        String input = menu.prompt("Add FirTree 🌲 (1) or Rock 🪨 (2): Enter your choice: ");
+
         if (!input.equals("1") && !input.equals("2")) {
             System.out.println("Invalid input");
             return;
         }
 
-        String[] coordinates = menu.prompt("Enter coordinates (x, y): ").split("\\s+");
-        int x = Integer.parseInt(coordinates[0]);
-        int y = Integer.parseInt(coordinates[1]);
-        Position position = new Position(x, y);
+        try {
+            String[] coordinates = menu.prompt("Enter coordinates (x, y): ").split("\\s+");
+            int x = Integer.parseInt(coordinates[0]);
+            int y = Integer.parseInt(coordinates[1]);
 
-        Item item = input.equals("1") ? new FirTree() : new Rock();
-        forest.addItem(item, position);
+            if (x < 1 || x > Forest.HEIGHT || y < 1 || y > Forest.WIDTH) {
+                System.out.println("Coordinates are out of bounds! Please ensure 1 <= x <= "
+                        + Forest.HEIGHT + " and 1 <= y <= " + Forest.WIDTH);
+                return;
+            }
 
-        System.out.println("Added item to the forest: " + item.toString() + " " + position.toString());
+            Position position = new Position(x, y);
+            Item item = input.equals("1") ? new FirTree() : new Rock();
+            forest.addItem(item, position);
+
+            System.out.println("Added item to the forest: " + item.toString() + " " + position.toString());
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid coordinate input! Please enter two integers separated by a space.");
+        }
     }
+
 
     /**
      * Displays a list of all items currently in the forest.
@@ -109,11 +120,11 @@ public class App {
         Random random = new Random();
         for (int i = 0; i < 5; i++) {
             AbstractItem firTree = new FirTree();
-            Position treePos = new Position(random.nextInt(10), random.nextInt(10));
+            Position treePos = new Position(random.nextInt(Forest.WIDTH) + 1, random.nextInt(Forest.HEIGHT) + 1);
             forest.tryAddItem(firTree, treePos);
             
             AbstractItem rock = new Rock();
-            Position rockPos = new Position(random.nextInt(10), random.nextInt(10));
+            Position rockPos = new Position(random.nextInt(Forest.WIDTH) + 1, random.nextInt(Forest.HEIGHT) + 1);
             forest.tryAddItem(rock, rockPos);
         }
         System.out.println("Added 5 trees and 5 rocks to the forest");
@@ -126,23 +137,23 @@ public class App {
         Random random = new Random();
         Position playerPos, hunterPos, homePos;
         
-        // Find empty position for player
-        do {
-            playerPos = new Position(random.nextInt(Forest.WIDTH-1) + 1, 
-                                   random.nextInt(Forest.HEIGHT-1) + 1);
-        } while (!forest.isEmptyPosition(playerPos));
-        
         // Find empty position for hunter
         do {
-            hunterPos = new Position(random.nextInt(Forest.WIDTH-1) + 1,
-                                   random.nextInt(Forest.HEIGHT-1) + 1);
+            hunterPos = new Position(random.nextInt(Forest.WIDTH) + 1,
+                                   random.nextInt(Forest.HEIGHT) + 1);
         } while (!forest.isEmptyPosition(hunterPos));
         
         // Find empty position for home
         do {
-            homePos = new Position(random.nextInt(Forest.WIDTH-1) + 1,
-                                 random.nextInt(Forest.HEIGHT-1) + 1);
+            homePos = new Position(random.nextInt(Forest.WIDTH) + 1,
+                                 random.nextInt(Forest.HEIGHT) + 1);
         } while (!forest.isEmptyPosition(homePos));
+
+        // Find empty position for player
+        do {
+            playerPos = new Position(random.nextInt(Forest.WIDTH) + 1,
+                    random.nextInt(Forest.HEIGHT) + 1);
+        } while (!forest.isEmptyPosition(playerPos));
 
         AbstractMoveableItem player = new Robot(playerPos);
         AbstractHunter hunter = new Wolf(hunterPos); 

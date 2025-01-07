@@ -134,37 +134,32 @@ public class Forest implements Serializable {
 
         if (!isValidPosition(newPos)) {
             status.append("Player could not move out of bounds!\n");
-            return;
-        }
-
-        // Check if player reached home
-        if (newPos.equals(home.getPosition())) {
+        } else if (newPos.equals(home.getPosition())) {
             status.append("Player reached home!\n");
             status.append("Game over!\n");
             gameOver = true;
             return;
-        }
-
-        // Move player and update hunter position
-        if (!items.containsKey(newPos)) {
+        } else if (!items.containsKey(newPos)) {
+            // Player successfully moves
             player.getPosition().move(relative);
             items.remove(playerPos);
             items.put(player.getPosition(), player);
             status.append("Player moved successfully!\n");
-            
-            hunter.hunt(player, this);
-            
-            // Check if hunter caught player after its move
-            if (hunter.getPosition().equals(player.getPosition())) {
-                status.append("Hunter caught the player!\n");
-                status.append("Game over!\n");
-                gameOver = true;
-            } else {
-                status.append("Hunter did not catch the player!\n");
-            }
         } else {
-            status.append("Player could not move!\n");
-        } 
+            status.append("Player could not move, the place is already taken!\n");
+        }
+
+        // Move hunter regardless of player's move
+        hunter.hunt(player, this);
+
+        // Check if hunter caught the player after its move
+        if (hunter.getPosition().equals(player.getPosition())) {
+            status.append("Hunter caught the player!\n");
+            status.append("Game over!\n");
+            gameOver = true;
+        } else {
+            status.append("Hunter did not catch the player!\n");
+        }
     }
 
     /**
@@ -210,6 +205,6 @@ public class Forest implements Serializable {
      */
     public boolean isEmptyPosition(Position position) {
         Item item = items.get(position);
-        return !items.containsKey(position) || (item != null && item == player);
+        return item == null || item == player;
     }
 }

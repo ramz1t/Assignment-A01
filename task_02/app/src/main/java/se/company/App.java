@@ -12,7 +12,8 @@
  * 
  * @author Timur Ramazanov
  */
-package org.example;
+package se.company;
+import se.company.menu.Menu;
 import se.company.resource.NormalEmployee;
 import se.company.resource.SuperEmployee;
 import se.company.resource.SuperPower;

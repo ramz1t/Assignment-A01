@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import se.adlez.game.*;
+import se.adlez.menu.Menu;
 
 /**
  * Main application class that manages the forest game.
@@ -62,14 +63,14 @@ public class App {
     public static void createEmptyForest() {
         forest = new Forest();
         forest.init();
-        System.out.println("Created empty forest");
+        Menu.println("Created empty forest");
     }
 
     /**
      * Displays the current state of the forest.
      */
     public static void printForest() {
-        System.out.println(forest.getGamePlan());
+        Menu.println(forest.getGamePlan());
     }
 
     /**
@@ -80,7 +81,7 @@ public class App {
         String input = menu.prompt("Add FirTree 🌲 (1) or Rock 🪨 (2): Enter your choice: ");
 
         if (!input.equals("1") && !input.equals("2")) {
-            System.out.println("Invalid input");
+            Menu.println("Invalid input");
             return;
         }
 
@@ -90,7 +91,7 @@ public class App {
             int y = Integer.parseInt(coordinates[1]);
 
             if (x < 1 || x > Forest.HEIGHT || y < 1 || y > Forest.WIDTH) {
-                System.out.println("Coordinates are out of bounds! Please ensure 1 <= x <= "
+                Menu.println("Coordinates are out of bounds! Please ensure 1 <= x <= "
                         + Forest.HEIGHT + " and 1 <= y <= " + Forest.WIDTH);
                 return;
             }
@@ -99,9 +100,9 @@ public class App {
             Item item = input.equals("1") ? new FirTree() : new Rock();
             forest.addItem(item, position);
 
-            System.out.println("Added item to the forest: " + item.toString() + " " + position.toString());
+            Menu.println("Added item to the forest: " + item.toString() + " " + position.toString());
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid coordinate input! Please enter two integers separated by a space.");
+            Menu.println("Invalid coordinate input! Please enter two integers separated by a space.");
         }
     }
 
@@ -110,7 +111,7 @@ public class App {
      * Displays a list of all items currently in the forest.
      */
     public static void listItems() {
-        System.out.println(forest.listItems());
+        Menu.println(forest.listItems());
     }
 
     /**
@@ -127,7 +128,7 @@ public class App {
             Position rockPos = new Position(random.nextInt(Forest.WIDTH) + 1, random.nextInt(Forest.HEIGHT) + 1);
             forest.tryAddItem(rock, rockPos);
         }
-        System.out.println("Added 5 trees and 5 rocks to the forest");
+        Menu.println("Added 5 trees and 5 rocks to the forest");
     }
 
     /**
@@ -163,7 +164,7 @@ public class App {
         forest.addHunterItem(hunter);
         forest.addHomeItem(home);
 
-        System.out.println("Added player, hunter and home to the forest");
+        Menu.println("Added player, hunter and home to the forest");
     }
 
     /**
@@ -171,20 +172,20 @@ public class App {
      * The game continues until the player reaches home, is caught by the hunter, or quits.
      */
     public static void playGame() {
-        System.out.println("\nWelcome to the game!\n\nThe rules are simple:\nMove the player to the home and avoid the hunter.\nBut be careful, the hunter is fast and can jump in end to catch you!!!");
+        Menu.println("\nWelcome to the game!\n\nThe rules are simple:\nMove the player to the home and avoid the hunter.\nBut be careful, the hunter is fast and can jump in end to catch you!!!");
         String choice;
         do {
-            System.out.println(forest.getGamePlan());
+            Menu.println(forest.getGamePlan());
             choice = menu.prompt("Move player left=a, right=d, up=w, down=s, quit=q.");
             switch (choice) {
                 case "a" -> forest.movePlayer(new Position(-1, 0));
                 case "d" -> forest.movePlayer(new Position(1, 0));
                 case "w" -> forest.movePlayer(new Position(0, -1));
                 case "s" -> forest.movePlayer(new Position(0, 1));
-                case "q" -> System.out.println("Bye bye!");
+                case "q" -> Menu.println("Bye bye!");
             }
             if (forest.isGameOver()) {
-                System.out.println(forest.getStatus());
+                Menu.println(forest.getStatus());
                 break;
             }
         } while (!choice.equals("q"));
@@ -200,7 +201,7 @@ public class App {
             ForestToFile.save(forest, filename);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error saving forest to file '" + filename + "'");
+            Menu.println("Error saving forest to file '" + filename + "'");
         }
     }
 
@@ -217,7 +218,7 @@ public class App {
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Error loading forest from file '" + filename + "'");
+            Menu.println("Error loading forest from file '" + filename + "'");
         }
     }
 
@@ -225,7 +226,7 @@ public class App {
      * Prints the current forest state as JSON to the console.
      */
     public static void printAsJson() {
-        System.out.println(ForestToJson.toJson(forest));
+        Menu.println(ForestToJson.toJson(forest));
     }
 
     /**

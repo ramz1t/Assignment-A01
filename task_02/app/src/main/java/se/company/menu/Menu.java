@@ -1,4 +1,4 @@
-package se.adlez;
+package se.company.menu;
 
 import java.util.LinkedHashMap;
 import java.util.Scanner;
@@ -9,10 +9,8 @@ import java.util.Scanner;
  * the menu to users, and running an input loop to process user choices.
  */
 public class Menu {
-    /** Stores menu option descriptions mapped to their keys */
-    final private LinkedHashMap<String, String> descriptions = new LinkedHashMap<>();
-    /** Stores menu actions mapped to their keys */
-    final private LinkedHashMap<String, Runnable> actions = new LinkedHashMap<>();
+    /** Stores menu options mapped to their keys */
+    final private LinkedHashMap<String, MenuOption> options = new LinkedHashMap<>();
     /** Scanner for reading user input */
     final private Scanner scanner = new Scanner(System.in);
 
@@ -23,8 +21,7 @@ public class Menu {
      * @param action The Runnable to execute when this option is selected
      */
     public void addOption(String key, String description, Runnable action) {
-        descriptions.put(key.toLowerCase(), description);
-        actions.put(key.toLowerCase(), action);
+        options.put(key, new MenuOption(description, action));
     }
 
     /**
@@ -33,7 +30,7 @@ public class Menu {
      */
     public void printMenu() {
         System.out.println("----------------");
-        descriptions.forEach((key, value) -> System.out.println("| " + key + ") " + value));
+        options.forEach((key, opt) -> System.out.println("| " + key + ") " + opt.description));
         System.out.println("| m) Print menu");
         System.out.println("| q) Quit");
         System.out.println("----------------");
@@ -50,6 +47,22 @@ public class Menu {
     }
 
     /**
+     * Prints a message to the console without a line break.
+     * @param message The message to print
+     */
+    public void print(String message) {
+        System.out.print(message);
+    }
+
+    /**
+     * Prints a message to the console followed by a line break.
+     * @param message The message to print
+     */
+    public void println(String message) {
+        System.out.println(message);
+    }
+
+    /**
      * Starts the menu system, displaying options and handling user input.
      * Runs in an infinite loop until the user selects quit.
      * Executes the corresponding action when a valid option is selected.
@@ -63,8 +76,8 @@ public class Menu {
                 System.exit(0);
             } else if (choice.equals("m")) {
                 printMenu();
-            } else if (actions.containsKey(choice)) {
-                actions.get(choice).run();
+            } else if (options.containsKey(choice)) {
+                options.get(choice).action.run();
             } else {
                 System.out.println("Invalid choice. Please try again.");
             }

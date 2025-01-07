@@ -3,6 +3,7 @@ package se.adlez.game;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import se.adlez.menu.Menu;
 
 /**
  * Represents a forest game board where items, player, hunter and home can be placed and moved.
@@ -119,11 +120,11 @@ public class Forest implements Serializable {
             return;
         }
         if (gameOver) {
-            System.out.println("Game over!\n");
+            Menu.println("Game over!\n");
             return;
         }
         if (home == null) {
-            System.out.println("Home not found!\n");
+            Menu.println("Home not found!\n");
             return;
         }
 

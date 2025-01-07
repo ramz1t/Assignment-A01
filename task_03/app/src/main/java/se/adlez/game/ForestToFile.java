@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import se.adlez.menu.Menu;
 
 /**
  * Utility class for saving and loading Forest objects to/from files.
@@ -25,9 +26,9 @@ public class ForestToFile {
     public static void save(Forest forest, String filename) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(forest);
-            System.out.println("Saved serialized forest to file '" + filename + "'.");
+            Menu.println("Saved serialized forest to file '" + filename + "'.");
         } catch (IOException e) {
-            System.out.println("Error saving serialized forest to file '" + filename + "'");
+            Menu.println("Error saving serialized forest to file '" + filename + "'");
         }
     }
 
@@ -42,10 +43,10 @@ public class ForestToFile {
     public static Forest load(String filename) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             Forest forest = (Forest) ois.readObject();
-            System.out.println("Loaded serialized forest to file '" + filename + "'.");
+            Menu.println("Loaded serialized forest to file '" + filename + "'.");
             return forest;
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error loading serialized forest from file '" + filename + "'");
+            Menu.println("Error loading serialized forest from file '" + filename + "'");
             return null;
         }
     }

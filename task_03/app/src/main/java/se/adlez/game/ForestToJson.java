@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import se.adlez.menu.Menu;
 
 /**
  * Utility class for saving and converting Forest objects as JSON.
@@ -33,7 +34,7 @@ public class ForestToJson {
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write(json);
         } catch (IOException e) {
-            System.out.println("Error saving serialized forest to file '" + filename + "'");
+            Menu.println("Error saving serialized forest to file '" + filename + "'");
         }
     }
 }

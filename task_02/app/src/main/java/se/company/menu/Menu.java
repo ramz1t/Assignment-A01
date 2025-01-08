@@ -42,7 +42,7 @@ public class Menu {
      * @return The user's input as a String
      */
     public String prompt(String message) {
-        System.out.print(message);
+        print(message);
         return scanner.nextLine();
     }
 
@@ -79,7 +79,7 @@ public class Menu {
             } else if (options.containsKey(choice)) {
                 options.get(choice).action.run();
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                println("Invalid choice. Please try again.");
             }
         }
     }

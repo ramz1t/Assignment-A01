@@ -7,7 +7,7 @@ class Dice {
     private static Random random = new Random();
 
     Dice(int sides) {
-        if (sides < 0) sides = 1;
+        if (sides < 1) throw new IllegalArgumentException("Number of sides can't be less than 1");
         this.sides = sides;
     }
 
